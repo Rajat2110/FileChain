@@ -21,7 +21,7 @@ function UploadFile({account, contract, provider}) {
           headers: {
               "Content-Type": "multipart/form-data",
               pinata_api_key: "1fbb768ec113f1faa809",
-              pinata_secret_api_key: "e11d8906f8b19e6b614fbeb4b4d9b9bb4ec966b7855b124607ab9d1c17e76a6c"
+              pinata_secret_api_key: "your api key here"
           }
         });
 
