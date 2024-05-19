@@ -6,8 +6,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sharp: ["SharpGrotesk", "sans-serif"]
-      }
+        sharp: ["SharpGrotesk", "sans-serif"],
+        sans: ["grotesquemt", "sans-serif"]
+      },
     },
   },
   plugins: [],

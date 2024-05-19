@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body {
-    overflow: hidden;
-} */
-
 @font-face {
     font-family: "SharpGrotesk";
     src: url("./fonts/SharpGrotesk-Book20.otf");
+}
+
+@font-face {
+    font-family: "grotesquemt";
+    src: url("./fonts/grotesquemt.otf");
 }

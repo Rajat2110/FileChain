@@ -4,17 +4,23 @@ pragma solidity >=0.7.0 <0.9.0;
 
 contract Upload {
   
+  struct File{
+    string url;
+    string fileName;
+  }
+  
   struct Access{
      address user; 
-     bool access; //true or false
+     bool access;
   }
-  mapping(address=>string[]) value;
+
+  mapping(address=>File[]) files;
   mapping(address=>mapping(address=>bool)) ownership;
   mapping(address=>Access[]) accessList;
   mapping(address=>mapping(address=>bool)) previousData;
 
-  function add(address _user,string memory url) external {
-      value[_user].push(url);
+  function add(address _user,string memory url, string memory fileName) external {
+      files[_user].push(File(url, fileName));
   }
   function allow(address user) external {
       ownership[msg.sender][user]=true; 
@@ -39,9 +45,9 @@ contract Upload {
       }
   }
 
-  function display(address _user) external view returns(string[] memory){
+  function display(address _user) external view returns(File[] memory){
       require(_user==msg.sender || ownership[_user][msg.sender],"You don't have access");
-      return value[_user];
+      return files[_user];
   }
 
   function shareAccess() public view returns(Access[] memory){

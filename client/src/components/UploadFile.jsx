@@ -25,12 +25,12 @@ function UploadFile({account, contract, provider}) {
           }
         });
 
-        const fileHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
-        contract.add(account, fileHash);
-
-        alert("File uploaded successfully");
+        alert("File uploaded successfully. Please complete the transaction to continue");
         setFileName("No file Selected");
         setFile(null);
+
+        const fileHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
+        contract.add(account, fileHash, fileName);
 
       } catch (error) {
         alert(error);
@@ -40,21 +40,22 @@ function UploadFile({account, contract, provider}) {
 
   function getFile(event) {
     const data = event.target.files[0];
+    setFileName(event.target.files[0].name);
     const reader = new window.FileReader();
     reader.readAsArrayBuffer(data);
     reader.onloadend = () => {
       setFile(event.target.files[0]);
     }
     console.log(event.target.files[0].name);
-    setFileName(event.target.files[0].name);
     event.preventDefault();
   }
 
   return (
-    <div className='my-16'>
+    <div className='py-16'>
+      <h1 className='text-2xl text-center mb-8 font-sharp font-semibold'>Upload your files here</h1>
       <form className='flex justify-center items-center gap-4' onSubmit={handleSubmit}>
         <input className='p-1 w-96 file:rounded-lg file:h-8 file:bg-cyan-600 file:text-white' type='file' id='file-upload' name='file' onChange={getFile} disabled={!account} />
-        <button className='w-24 p-1 rounded-md text-white font-bold bg-cyan-600' type='submit' disabled={!file}>Upload</button>
+        <button className='w-24 p-1 rounded-md text-white font-bold bg-cyan-600 hover:bg-cyan-500' type='submit' disabled={!file}>Upload</button>
       </form>
     </div>
   )
